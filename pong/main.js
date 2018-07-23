@@ -70,6 +70,10 @@ var Player = function(x, y, width, height) {
         this.y = y;
     }
 
+    this.reset = function() {
+        this.setPosition(canvasHeight/2);
+    }
+
 }
 
 var Cpu = function(x, y, width, height) {
@@ -99,6 +103,10 @@ var Cpu = function(x, y, width, height) {
 
     this.setPosition = function(y) {
         this.y = y;
+    }
+
+    this.reset = function() {
+        this.setPosition(canvasHeight/2);
     }
 }
 
@@ -144,9 +152,13 @@ var Ball = function(x, y, width, height) {
     }
 
     this.reset = function(scorer) {
+        //reset ball
         this.x = canvasWidth/2;
         this.y = canvasHeight/2;
-        this.dy = 0;        
+        this.dy = 0;
+        //Reset paddles
+        player.reset();
+        cpu.reset();
     }
 }
 
@@ -251,6 +263,7 @@ function resetGame() {
     playerScore = 0;
     cpuScore = 0;
     ball.reset();
+
     windowInterval = window.setInterval(gameLoop, 1000/15, false);
 }
 
